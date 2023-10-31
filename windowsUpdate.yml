@@ -1,0 +1,21 @@
+---
+- name: Update Windows Server
+  hosts: windows_servers
+  gather_facts: no
+  tasks:
+    - name: Check for updates
+      win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+        state: search
+      register: update_result
+
+    - name: Print update information
+      debug:
+        var: update_result
+
+    - name: Install updates if available
+      win_updates:
+        state: installed
+      when: update_result.updates_found > 0
