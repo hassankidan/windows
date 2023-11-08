@@ -8,7 +8,7 @@
         category_names:
           - SecurityUpdates
           - CriticalUpdates
-        state: search
+        state: searched  # Corrected from 'search' to 'searched'
       register: update_result
 
     - name: Print update information
